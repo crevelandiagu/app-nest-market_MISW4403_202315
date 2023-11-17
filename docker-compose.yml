@@ -1,0 +1,46 @@
+version: '3'
+services:
+# -----------------------Servicio web -----------------------------
+#  app_web:
+#    build:
+#      context: .
+#      dockerfile: dev.Dockerfile
+#    environment:
+#      DATABASE_URL: postgresql://postgres:postgres@db_web:5432/
+#    ports:
+#      - "3000:3000"
+#    expose:
+#      - "3000"
+#    depends_on:
+#      db_web:
+#        condition: service_healthy
+#    volumes:
+#      - ./:/usr/src/app
+#      - /usr/src/app/node_modules
+#    restart: unless-stopped
+#    networks:
+#      - service_web
+#      - web_global
+
+  db_web:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: culturagastronomica_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 2s
+      timeout: 5s
+      retries: 5
+    networks:
+      - service_web
+
+networks:
+  service_web:
+  web_global:
