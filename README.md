@@ -2,7 +2,7 @@
 
 ## Modelo
 
-![mi-imagen](modelo.png) 
+![mi-imagen](modelo2.png) 
 
 ## Collections
 
