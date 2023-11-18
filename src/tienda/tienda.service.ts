@@ -27,7 +27,10 @@ export class TiendaService {
 
     async create(tienda: TiendaEntity): Promise<TiendaEntity> {
         // tres caracteres (e.g., SMR, BOG, MED).
-        return await this.tiendaRepository.save(tienda);
+        let tiendaCiudad = tienda.ciudad
+        if (/^([A-Z]{3,})$/.test(tiendaCiudad))
+            return await this.tiendaRepository.save(tienda);
+        throw new BusinessLogicException("El tienda no tiene la ciudad de la forma ABC (3 letras y mayusculas)", BusinessError.PRECONDITION_FAILED);
     }
 
     async update(id: string, tienda: TiendaEntity): Promise<TiendaEntity> {
@@ -35,7 +38,11 @@ export class TiendaService {
         if (!persistedTienda)
             throw new BusinessLogicException("La tienda con el id dado no existe", BusinessError.NOT_FOUND);
         // tres caracteres (e.g., SMR, BOG, MED).
-        return await this.tiendaRepository.save({...persistedTienda, ...tienda});
+        let tiendaCiudad = tienda.ciudad
+        if (/^([A-Z]{3,})$/.test(tiendaCiudad))
+            return await this.tiendaRepository.save({...persistedTienda, ...tienda});
+        throw new BusinessLogicException("El tienda no tiene la ciudad de la forma ABC (3 letras y mayusculas)", BusinessError.PRECONDITION_FAILED);
+
     }
 
     async delete(id: string) {

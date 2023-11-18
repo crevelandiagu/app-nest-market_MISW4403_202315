@@ -25,7 +25,10 @@ export class ProductoService {
 
     async create(producto: ProductoEntity): Promise<ProductoEntity> {
         // Perecedero, No perecedero
-        return await this.productoRepository.save(producto);
+        let tipoProducto = producto.tipo
+        if (tipoProducto == 'Perecedero' || tipoProducto == 'No perecedero')
+            return await this.productoRepository.save(producto);
+        throw new BusinessLogicException("El producto no tiene el tipo Perecedero o No perecedero", BusinessError.PRECONDITION_FAILED);
     }
 
     async update(id: string, producto: ProductoEntity): Promise<ProductoEntity> {
@@ -33,7 +36,10 @@ export class ProductoService {
         if (!persistedProducto)
             throw new BusinessLogicException("El producto con el id dado no existe", BusinessError.NOT_FOUND);
         // Perecedero, No perecedero
-        return await this.productoRepository.save({...persistedProducto, ...producto});
+        let tipoProducto = producto.tipo
+        if (tipoProducto == 'Perecedero' || tipoProducto == 'No perecedero')
+            return await this.productoRepository.save({...persistedProducto, ...producto});
+        throw new BusinessLogicException("El producto no tiene el tipo Perecedero o No perecedero", BusinessError.PRECONDITION_FAILED);
     }
 
     async delete(id: string) {
