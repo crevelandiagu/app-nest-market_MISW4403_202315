@@ -8,6 +8,7 @@ import { TiendaModule } from './tienda/tienda.module';
 
 import {ProductoEntity} from "./producto/producto.entity";
 import {TiendaEntity} from "./tienda/tienda.entity";
+import { ProductoTiendaModule } from './producto-tienda/producto-tienda.module';
 
 @Module({
   imports: [ProductoModule, TiendaModule,
@@ -23,6 +24,7 @@ import {TiendaEntity} from "./tienda/tienda.entity";
       synchronize: true,
       keepConnectionAlive: true
     }),
+    ProductoTiendaModule,
 
 
   ],
