@@ -30,7 +30,18 @@
 
 ## Collections
 
-The folder **collections** has all collections for this API, its has examples too.
+En la carpeta **collections** se encontraran 4 collection que indican lo siguiente
+
+| Nombre collection | proposito                                                            |
+|-------------------|----------------------------------------------------------------------|
+|Collection_ALL_Producto_Tienda_Producto-Tienda.postman_collection.json| contiene todas las colecciones de: producto, tienda, producto tienda |
+|Producto_Collection.postman_collection.json| Solo contiene la coleccion de producto                               |
+|Producto_Tienda_collection.postman_collection.json| Solo contiene la colecion de la asociacion producto tienda           |
+|Tienda_Collectio.postman_collection.json| Solo contiene la colecion de la tienda                               |
+
+## link del repo
+
+https://github.com/crevelandiagu/app-nest-market_MISW4403_202315.git
 
 ## Dockerfile y docker-compose
 

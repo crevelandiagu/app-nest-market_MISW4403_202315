@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "5b78594d-37b2-421e-ba72-3d947c844604",
+		"name": "Producto_Collection",
+		"description": "solo el producto collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Producto",
+			"item": [
+				{
+					"name": "Add an product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()\r",
+									"pm.globals.set(\"producto_id\", data.id);\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Carne\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"Perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add an product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Carne\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"Perecedero\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"nombre\": \"Carne\",\n    \"precio\": \"1000\",\n    \"tipo\": \"Perecedero\",\n    \"id\": \"30cc8ae3-9177-4496-af78-68826d7d867f\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Add an invalid product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 412\", function () {\r",
+									"   pm.response.to.have.status(412);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Leche\",\r\n    \"precio\": \"100\",\r\n    \"tipo\": \"LACTEO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add an invalid product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Carne\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"LACTEO\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El producto no tiene el tipo Perecedero o No perecedero\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of products > ' + 0, function () {\r",
+									"   var data = pm.response.json()\r",
+									"   pm.expect(data.length).to.greaterThan(0)\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"9326ab71-7cc0-4319-a1ca-b0479b852217\",\n        \"nombre\": \"Carne\",\n        \"precio\": 1000,\n        \"tipo\": \"Perecedero\",\n        \"tienda\": []\n    },\n    {\n        \"id\": \"08caa791-9c8d-4ccf-9ad9-110c8181a4ad\",\n        \"nombre\": \"Carne\",\n        \"precio\": 1000,\n        \"tipo\": \"Perecedero\",\n        \"tienda\": []\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get one product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get one product",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/{{producto_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"{{producto_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"447b1329-861d-46f5-b884-e4db416013da\",\n    \"nombre\": \"Carne\",\n    \"precio\": 1000,\n    \"tipo\": \"Perecedero\",\n    \"tienda\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "Get one invalid product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"No se encontró el producto con la identificación proporcionada.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get one invalid product",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encontró el producto con la identificación proporcionada.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update an product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pollo\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"No perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update an product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Pollo\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"No perecedero\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/{{producto_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"{{producto_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": \"447b1329-861d-46f5-b884-e4db416013da\",\n    \"nombre\": \"Pollo\",\n    \"precio\": \"1000\",\n    \"tipo\": \"No perecedero\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update an invalid product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"El producto con el id dado no existe\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Pollo\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"No perecedero\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update an invalid product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nombre\": \"Pollo\",\r\n    \"precio\": \"1000\",\r\n    \"tipo\": \"No perecedero\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El producto con el id dado no existe\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete one product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"   pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/{{producto_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"{{producto_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete one product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/{{producto_id}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"{{producto_id}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "Text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Delete one invalid product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"   pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Get expected error message\", function () {\r",
+									"   var data = pm.response.json();\r",
+									"   pm.expect(data.message).to.eql(\"El producto con el id dado no fue encontrado\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"products",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete one invalid product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/products/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"products",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El producto con el id dado no fue encontrado\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
